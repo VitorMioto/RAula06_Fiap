@@ -60,3 +60,22 @@ x0 = min(airquality$Wind)
 x1 = max(airquality$Wind)
 y0 = rg$coefficients[1] + rg$coefficients[2]*x0
 y1 = rg$coefficients[1] + rg$coefficients[2]*x1
+
+install.packages("lattice")
+library(lattice)
+state <- data.frame(state.x77, region =state.region)
+xyplot(Life.Exp ~ Income | region,
+       data = state,
+       layout = c(4, 1))
+
+install.packages("plotly")
+library(plotly)
+
+plot_ly(data = airquality,
+        x = ~Wind, y = ~Ozone,
+        text = ~paste0(Day, '/', Month),
+        type = 'scatter', mode ='markers') -> p
+#Exibe p
+print( p )
+
+
