@@ -1,10 +1,11 @@
 ---
-title: "R Notebook"
+title: "Portifólio R"
 output:
   html_document:
     df_print: paged
 ---
 ```{r setup, include=FALSE}
+load("C:/Users/logonrmlocal/Downloads/BrFlights2.RData")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -23,25 +24,30 @@ head(cars)
 plot(cars)
 ```
 
-##Agora vamos utilizar o dataset BrFlights2 utilizar o pacote dplyr...
+## Agora vamos utilizar o dataset BrFlights2 e utilizar o pacote dplyr...
+
+
 ```{r}
-library(dplyr)
 
 head(BrFlights2)
 
-
-
-
-
 ```
-##Selecionando alguns campos com o comando 'select'
+
+
+## Selecionando alguns campos com o comando 'select'
+
+
+```{r}
+library(dplyr)
+```
 
 ```{r}
 BrFlights2 %>% select(Companhia.Aerea, Situacao.Voo, Partida.Prevista, Partida.Real, Chegada.Prevista, Chegada.Real) -> df1
 head(df1)
 ```
 
-##Qual a quantidade de voos realizados e cancelados?
+## Qual a quantidade de voos realizados e cancelados?
+
 
 ```{r}
 
@@ -50,7 +56,7 @@ factSitu <- factor(df1$Situacao.Voo)
 summary(factSitu)
 ```
 
-##Filtrando voos realizados e selecionando apenas voos que não tiveram atrasos
+## Filtrando voos realizados e selecionando apenas voos que não tiveram atrasos
 
 ```{r}
 df1 %>% filter(Situacao.Voo == "Realizado") -> df2
@@ -63,16 +69,15 @@ head(df_SemAtraso)
 
 ```
 
-##Contando a quantidade de voos realizados por companhia...
+## Contando a quantidade de voos realizados por companhia...
 
 ```{r}
 df_SemAtraso %>% count(Companhia.Aerea) -> QtdCompanhia
 
-
 ```
 
-##Plotando informações
+## Plotando informações
 
 ```{r}
-plot(x=xx$n[1:5],ylab="Qtd de voos", xlab="Companhias", main= "As 5 companhias que mais voaram")
+plot(x=QtdCompanhia$n[1:5],ylab="Qtd de voos", xlab="Companhias", main= "As 5 companhias que mais voaram")
 ```
